@@ -1,0 +1,155 @@
+;[gain=1.0 name=ED2G_16 duration=300s fade=5s]
+; The line above defines the extra options for MSXplay.js.
+; gain    : specify the volume gain of the playback. It is just linear multiplier, not dB.
+; name    : specify the name of the mml, use as the base download filename.
+; duration: specify the length of the song.
+; fade    : specify the fade time.
+#opll_mode 0
+#tempo 170
+#title { "英雄伝説2 地底 洞窟"}
+
+;マシンID
+; 1:SONY製マシン
+; 2:Panasonic製マシン
+; 3:SANYO製マシン
+;#machine_id 0
+
+;LFOのモード。1を指定するとLFOの速度が若干速めになります。初期値は0です。
+;#lfo_mode 0
+
+;トラックバッファを割り当てます。
+;#alloc 0=1000
+;#alloc { 3=100
+;        ,5=256
+;       }
+
+;1文字の英文字(A-Z)にマクロのオフセット番号を定義します。
+; a = 10と定義定義した場合場合、以下以下は*20と同意になる。
+; *a10
+;#macro_offset <定義文字 = no>
+#macro_offset a = 100
+#macro_offset b = 120
+#macro_offset c = 140
+#macro_offset d = 160
+#macro_offset e = 180
+#macro_offset f = 200
+#macro_offset r = 220
+#macro_offset g = 230
+#macro_offset h = 240
+
+@e0  = {1, 0, f }
+@e1  = {1, 0, fedcd }
+
+@e10 = {2, 0, db975310 }
+;@e11 = {2, 5, fedccbbaa9988776655443322110 }
+@e11 = {2, 5 , fedcba9876543210 }
+@e12 = {2, 2, fedccbbaa9988776655443322110 }
+
+@e21 = {0, 0, fedcba9 }
+@e22 = {0, 0, def }
+@e23 = {0, 0, fed }
+
+@e30 = {0, 0, ffffffffff0 }
+@e31 = {0, 0, fedcba9876543210 }
+
+;* ベース
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v15 = {10, 4,15, 8, 2, 1, 0, 0, 0, 0, 0, 0, 1
+             ,15, 6, 4, 4, 0, 8, 1, 1, 1, 0, 1}
+
+*0 = {Y6,255 Y7,255}
+*1 = {Y14,32}
+
+A r12
+9AB [
+9  @9 V13 L12 O2 HF
+A  @9 V11 L12 O2 HF \1
+B  @9 V11 L12 O2 HF \-1
+9A [[araa>a<a]3 ab>cdc<b]2
+B  [r1]4
+9 @4 V15 L12 O5 HO H10,1,1,2 @e23 
+A @4 V13 L12 O5 HO H10,1,1,2 @e23
+B @0 V14 L12 O6 HO H10,1,1,2 @e23
+9AB a2.ab>c <b4&bag d2 a2b4gab a4b4>c4d4
+9AB e4dc<b a4 ab>c d4c<bgd4deb a4ab>cd4c<bg> c4<b4a4 ab>c
+9AB d4e4f4gfg e2c4c<b>c d4e4f4g4 f4&fede4<arb >c4&c<b>c<b4&b>cd
+9AB g4frge4&ecd c4&c<b>c <b4grb a2&arr
+9 @6 V12 L12 O5 HO H5,1,1,2 @e0
+A @6 V10 L12 O5 HO H5,1,1,2 @e0
+B @9 V10 L12 O6 HO H5,1,1,2 @e22
+9AB a>ce a2b4g4 e2.<a>ce a2b4g4 b4>c4<b4&bab >c4<bage4<ar>c
+9AB e4<ar>c e4d4 c4&cdc<b4g4
+9AB ]0
+
+CD [
+C @13      V13    O2          L12 Q8
+D @15      V13 \4 O3 H0,2,0,2 L12 Q6
+;D @10 @e21 V13 \4 O2 H0,2,0,2 L12
+CD [[ara a>a<a]3 ab>cdc<b]2
+CD [ara]4 [grg]4 [frf]2 [grg]2 aragrgfrfere
+CD [ara]4 [grg]4 [frf]2 [grg]2 aragrga4r4
+CD [grg]4 [ara]4 [grg]4 [ara]3 g>g<g
+CD [frf]2 [grg]2 [g+rg+]2 a>a<ag>g<g [frf]2 [grg]2 ara a>a<a a>a<a grg
+CD [frf]3 f>f<g [ara]3 grg [frf]4 >e>e<e <b>b<b g+>g+<g+ e>e<e
+CD frf f>f<g ara b>cd d>d<d <a>a<a frf f>f<g [ara]2 [grg]2
+CD ]0
+
+1 [
+1 @e1 V11 L12 O4 H10,1,1,1
+1 [aaabbb>cccddd<]4
+1 @e1 V11 O3
+1 a>cea  >ceba ec<be d<b>dg  ab>d<b agd<b a>cfa> cf<<b>d   gb>dg< a4g4f4e4<
+1 a>cea  >ceba ec<be d<b>dg  ab>d<b agd<b a>cfa> cf<<b>d   gb>dg< a4g4a4>cde<
+1 b4>c4d4<b4 >c4<a>cea4g4 f4d4<b4&b>cd c4<b4>cea>cea <<a2g4f4>
+1 d4drdc2 <a2g4drd e4ab>ce4d4 f4e4 c4<a4 b4ea>ce4d4
+1 f4e4c4<a4 g+4eg+b>defg+ab <a4b4>c4<e4>
+1 c4 df+a >c<af ec<a <a>ce a>ce< dga b>cd<
+1 ]0
+
+2 [
+2 @e1 V11 L12 O4 H10,1,1,1
+2 [eeegggaaabbb]4
+2 @e1 V9  O3 \1
+2 r12 a>cea  >ceba ec<be d<b>dg  ab>d<b agd<b a>cfa> cf<<b>d   gb>d<  e4d4c4<b4
+2 r12 a>cea  >ceba ec<be d<b>dg  ab>d<b agd<b a>cfa> cf<<b>d   gb>d<  e4d4e4>rcd<
+2 g4a4b4g4 a4ea>ce4e4 <b2g4&gab a4g4aea>cea <f4f4d4d4
+2 b4brba2 f2d4<brb> c4ega>c4<b4 >c4c4<a4f4 g4cea>c4<b4>
+2 c4c4<a4f4 e4<eg+b>defg+ abe4g4a4c4
+2 a4 df+a> c<af ec<a <a>ce a>ce <dga> gab
+2 ]0
+
+*F0 = {SO Q1 V15 H0,10,0,-15 O3}
+*F1 = {SF Q8 V13 H0,10,0,-15 O5}
+*F2 = {SO Q1 V13 H0,10,0,-30 O4}
+F [
+F *1 @0 V15 @e30 O3 L12
+F [[*F0 frr *F1 crr]3 | *F0 frr *F1 ccc] *F0 frr *F1 cr *F2 a
+F [*F0 frr *F1 crr]7 *F0 frr *F1 ccc
+F [*F0 frr *F1 crr]7 *F1 crr *F1 cr *F2 a
+F [*F0 frr *F1 crr]7 *F0 frr *F1 ccc
+F [*F0 frr *F1 crr]7 *F2 >d<aa ffr
+F [*F0 frr *F1 crr]7 *F0 frr *F1 ccc
+F [*F0 frr *F1 crr]5 *F2 >d<af *F1 ccc
+F ]0
+
+E [
+E @10 V15 @e31 O1 L12 H0,10,0,-5
+E [[rrr frr]3 | rrr fff] rrr frr
+E [rrr frr]7 rrr fff
+E [rrr frr]7 frr frr
+E [rrr frr]7 rrr fff
+E [rrr frr]7 rrr rrr
+E [rrr frr]7 rrr fff
+E [rrr frr]5 rrr fff
+E ]0
+
+3 [
+3 @e10 V13 L12 O4
+3 [[@e10 ccc @e11c@10cc]3 | @e10 ccc @e11ccc] @e10 ccc @e11crc
+3 [@e10 ccc @e11c@10cc]7 @e10 ccc @e11ccc
+3 [@e10 ccc @e11c@10cc]7 @e11 c@e10cc @e11cr@e12c
+3 [@e10 ccc @e11c@10cc]7 @e10 ccc @e11ccc
+3 [@e10 ccc @e11c@10cc]7 @e12 ccc ccr
+3 [@e10 ccc @e11c@10cc]7 @e10 ccc @e11ccc
+3 [@e10 ccc @e11c@10cc]5 @e12 ccc @e11ccc
+3 ]0

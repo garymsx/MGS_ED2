@@ -1,0 +1,105 @@
+;[gain=1.0 name=ED2G_16P duration=300s fade=5s]
+; The line above defines the extra options for MSXplay.js.
+; gain    : specify the volume gain of the playback. It is just linear multiplier, not dB.
+; name    : specify the name of the mml, use as the base download filename.
+; duration: specify the length of the song.
+; fade    : specify the fade time.
+#opll_mode 0
+#tempo 170
+#title { "英雄伝説2 地底 洞窟 PSG"}
+
+;マシンID
+; 1:SONY製マシン
+; 2:Panasonic製マシン
+; 3:SANYO製マシン
+;#machine_id 0
+
+;LFOのモード。1を指定するとLFOの速度が若干速めになります。初期値は0です。
+;#lfo_mode 0
+
+;トラックバッファを割り当てます。
+;#alloc 0=1000
+;#alloc { 3=100
+;        ,5=256
+;       }
+
+;1文字の英文字(A-Z)にマクロのオフセット番号を定義します。
+; a = 10と定義定義した場合場合、以下以下は*20と同意になる。
+; *a10
+;#macro_offset <定義文字 = no>
+#macro_offset a = 100
+#macro_offset b = 120
+#macro_offset c = 140
+#macro_offset d = 160
+#macro_offset e = 180
+#macro_offset f = 200
+#macro_offset r = 220
+#macro_offset g = 230
+#macro_offset h = 240
+
+@e0  = {1, 0, f }
+@e1  = {1, 0, fedcd }
+@e2  = {1, 0, fedcdcbaba9876543210 }
+
+@e10 = {2, 0, db975310 }
+;@e11 = {2, 5, fedccbbaa9988776655443322110 }
+@e11 = {2,10, f,n9,d,n8,b,n7,9,n6,75310 }
+;@e11 = {2,10, fdb975310 }
+@e12 = {2, 2, fedccbbaa9988776655443322110 }
+
+@e21 = {0, 0, fedcba9 }
+@e22 = {0, 0, def }
+@e23 = {0, 0, fed }
+
+@e30 = {0, 0, ffffffffff0 }
+@e31 = {0, 0, fedcba9876543210 }
+
+;* ベース
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v15 = {10, 4,15, 8, 2, 1, 0, 0, 0, 0, 0, 0, 1
+             ,15, 6, 4, 4, 0, 8, 1, 1, 1, 0, 1}
+
+;* ブラス
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v18 = {25, 7,15, 2, 3, 0, 0, 1, 0, 0, 0, 0, 0
+             ,10, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0}
+
+
+*0 = {Y6,255 Y7,255}
+*1 = {Y14,32}
+
+1 [
+1 @e1 V13 L12 O4 HF
+1 [a-a-a-b-b-b-bbb>d-d-d-<]4
+1 @e1 V13 L12 O4 HO H10,1,1,1
+1 a-2.a-b-b> <b-4&b-a-g- d-2 a-2b-4g-a-b- a-4b-4b4>d-4
+1 e-4d-<bb- a-4 a-b-b> d-4<bb-g-d-4d-e-b- a-4a-b-b>d-4<bb-g-> <b4b-4a-4 a-b-b>
+1 d-4e-4e4g-eg- e-2<b4bb-b> d-4e-4e4g-4 e4&ee-d-e-4<a-rb- b4&bb-bb-4&b-b>d-
+1 g-4erg-e-4&e-<b>d- <b4&bb-b> <b-4g-rb- a-2&a-rr
+1 @e1 V13 L12 O4
+1 a-b>e- a-2b-4g-4 e-2.<a-b>e- a-2b-4g-4 b-4b4b-4&b-a-b- b4b-a-g-e-4<a-rb>
+1 e-4<a-rb> e-4d-4 <b4&b>d-<bb-4g-4
+1 ]0
+
+2 [
+2 @e1 V12 L12 O4 H10,1,1,1 \1
+2 [e-e-e-g-g-g-a-a-a-b-b-b-]4
+2 @e1 V11 O3
+2 a-b>e-a-  b>e-b-a- e-<bb-e- d-<b->d-g-  a-b->d-<b- a-g-d-<b- a-b>ea-> <b>e<<b->d-   g-b->d-g-< a-4g-4e4e-4<
+2 a-b>e-a-  b>e-b-a- e-<bb-e- d-<b->d-g-  a-b->d-<b- a-g-d-<b- a-b>ea-> <b>e<<b->d-   g-b->d-g-< a-4g-4a-4b>d-e-<
+2 b-4b4>d-4<b-4 b4a-b>e-a-4g-4 e4d-4<b-4&b-b>d- <b4b-4b>e-a-b>e-a- <<a-2g-4e4>
+2 d-4d-rd-<b2> <a-2g-4d-rd- e-4a-b-b>e-4d-4 e4e-4 <b4a-4 b-4e-a-b>e-4d-4
+2 e4e-4<b4a-4 g4e-gb->d-e-ega-b- <a-4b-4b4e-4>
+2 <b4> d-fa- ba-e e-<ba- <a-b>e- a-b>e-< d-g-a- b-b>d-<
+2 ]0
+
+3 [
+3 @e2 V13  O2 L12 Q8
+3 [[a-ra- @e11a-@e2>a-<a-]3 a-b-b>@e11d-@e2<bb-]2
+3  [a-ra- @e11a-@e2ra-]2 [g-rg- @e11g-@e2rg-]2 ere @e11e@e2re g-rg- @e11g-@e2rg- a-ra-@e11g-@e2rg-ere@e11e-e-e-@e2
+3 [a-ra- @e11a-@e2ra-]2 [g-rg- @e11g-@e2rg-]2 ere @e11e@e2re g-rg- @e11g-@e2rg- a-ra-@e11g-@e2rg-a-4@e11a-ra-@e2
+3 [g-rg- @e11g-@e2rg-]2 [a-ra- @e11a-@e2ra-]2 [g-rg- @e11g-@e2rg-]2 a-ra- @e11a-@e2ra- a-ra- @e11g-g-g-@e2
+3 ere @e11e@e2re g-rg- @e11g-@e2rg- grg @e11g@e2rg a->a-<a- @e11g->@e2g-<g- ere @e11e@e2re g-rg- @e11g-@e2rg- a-ra- @e11a->@e2a-<a- a->a-<a- @e11g-@e2rg-
+3 ere @e11e@e2re ere @e11e>@e2e<g- a-ra- @e11a-@e2ra- a-ra- @e11g-@e2rg- [ere @e11e@e2re]2 >e->e-<e- @e11<b->@e2b-<b- g>g<g @e11e-e-e-@e2
+3 ere @e11e>@e2e<g- a-ra- @e11b->@e2<b>d- d->d-<d- <@e11a->@e2a-<a- ere @e11e>@e2e<g- a-ra- @e11a-@e2ra- g-rg- @e11g-g-g-@e2
+3 ]0
